@@ -1,0 +1,42 @@
+TR
+
+
+Merhaba Sonata Music uygulamasına hoş geldiniz.
+------------------------------------------------
+Bu uygulama Caner Karakuş (info@canerkarakus.com.tr) tarafından geliştirilmiştir. İzinsiz kopyalanamaz.
+--------------------------------------------------------------------------------------------------------
+
+E-mail Entegrasyonu Hakkında
+-----------------------------
+.env.local dosyası olmadan e-mail gönderimi çalışmaz.
+Oluşturacak olduğunuz .env.local dosyası içerisine sağlayıcınızın SMTP bilgilerini girmeniz gerekmektedir.
+Aksi takdirde e-mail alamazsınız.
+E-mail entegrasyonu hazır haldedir. Sadece .env.local dosyası oluşturmanız yeterlidir.
+---------------------------------------------------------------------------------------
+
+UYARI
+------
+
+.env.local dosyasınızı kimseyle paylaşmayınız. Bu dosya size özeldir. (Yapay zeka(AI) ile asla.)
+
+
+EN
+
+
+Welcome to the Sonata Music app.
+---------------------------------
+This app was developed by Caner Karakuş (info@canerkarakus.com.tr). It may not be copied without permission.
+-------------------------------------------------------------------------------------------------------------
+
+About Email Integration
+------------------------
+Email sending will not work without the .env.local file.
+You must enter your provider's SMTP information into the .env.local file you will create.
+Otherwise, you will not be able to receive emails.
+Email integration is ready to use. All you need to do is create the .env.local file.
+-------------------------------------------------------------------------------------
+
+WARNING
+------
+
+Do not share your .env.local file with anyone. This file is private to you. (Never with artificial intelligence (AI).)

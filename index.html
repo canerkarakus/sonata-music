@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonata</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Üst Bar -->
+        <header class="top-bar">
+            <div class="nav-arrows">
+                <button class="nav-arrow" id="backBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-arrow" id="forwardBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="top-bar-center">
+                <button class="home-btn" id="homeBtn">
+                    <i class="fas fa-home"></i>
+                </button>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Ne çalmak istiyorsun?" id="searchInput">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+            <div class="user-controls">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-dropdown-container">
+                    <button class="login-btn profile-btn" id="loginBtn">
+                        <div class="profile-image">
+                            <img src="assets/profile.png" alt="Profil Fotoğrafı" id="profileImage">
+                        </div>
+                        <span id="userNameDisplay">Giriş Yap</span>
+                    </button>
+                    
+                    <!-- User Dropdown Menu -->
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-item" id="profileBtn">
+                            <i class="fas fa-user"></i>
+                            <span>Profil</span>
+                        </div>
+                        <div class="dropdown-item" id="uploadSongBtn" style="display: none;">
+                            <i class="fas fa-upload"></i>
+                            <span>Şarkı Yükle</span>
+                        </div>
+                        <div class="dropdown-item" id="settingsBtn">
+                            <i class="fas fa-cog"></i>
+                            <span>Ayarlar</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Oturumu Kapat</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize"></button>
+                    <button class="window-btn maximize"></button>
+                    <button class="window-btn close"></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Ana İçerik Alanı -->
+        <main class="main-layout">
+            <!-- Sol Sidebar -->
+            <aside class="left-sidebar" id="leftSidebar">
+                <!-- Kitaplığın Header -->
+                <div class="library-header">
+                    <div class="library-title">
+                        <button class="minimize-library-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <i class="fas fa-book"></i>
+                        <span>Kitaplığın</span>
+                    </div>
+                    <div class="library-controls">
+                        <button class="library-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="library-btn fullscreen-btn">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtre Tabs -->
+                <div class="filter-tabs">
+                    <button class="filter-tab active">Çalma Listeleri</button>
+                    <button class="filter-tab">Podcastler</button>
+                </div>
+
+                <!-- Arama ve Sıralama -->
+                <div class="search-controls">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="sort-controls">
+                        <span>Yakın tarihli</span>
+                        <button class="sort-btn">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Müzik Listeleri -->
+                <div class="music-list" id="musicList">
+                    <div class="music-item liked-songs">
+                        <div class="item-icon liked-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="item-details">
+                            <span class="item-name">Beğenilen Şarkılar</span>
+                            <span class="item-info" id="likedSongsCount">📌 Çalma listesi • 0 şarkı</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Dinamik playlist'ler buraya eklenecek -->
+                </div>
+                
+                <div class="sidebar-resizer sidebar-resizer-right" id="leftResizer"></div>
+            </aside>
+
+            <!-- Ana İçerik -->
+            <div class="center-content">
+                <div class="content-header">
+                    <h1>Senin için Hazırlandı</h1>
+                </div>
+                
+                <div class="daily-mix-grid">
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-01"></div>
+                            <div class="mix-number">01</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 1</h3>
+                            <p>Türkçe Pop, Indie Rock ve daha fazlası</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-02"></div>
+                            <div class="mix-number">02</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 2</h3>
+                            <p>Electronic, Synthwave ve daha fazlası</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-03"></div>
+                            <div class="mix-number">03</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 3</h3>
+                            <p>Jazz, Blues ve daha fazlası</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-04"></div>
+                            <div class="mix-number">04</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 4</h3>
+                            <p>Classical, Ambient ve daha fazlası</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-05"></div>
+                            <div class="mix-number">05</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 5</h3>
+                            <p>Hip-Hop, R&B ve daha fazlası</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mix-card">
+                        <div class="card-image">
+                            <div class="mix-gradient mix-06"></div>
+                            <div class="mix-number">06</div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Daily Mix 6</h3>
+                            <p>Rock, Metal ve daha fazlası</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Releases Section -->
+                <div class="new-releases-section">
+                    <div class="section-header">
+                        <h2>Yeni Çıkanlar</h2>
+                    </div>
+                    <div class="new-releases-grid" id="newReleasesGrid">
+                        <!-- Yayınlanan şarkılar buraya dinamik olarak eklenecek -->
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>Son dinlediklerinize göre</h2>
+                </div>
+                
+                <div class="recent-cards">
+                    <div class="recent-card">
+                        <div class="card-image">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Çalma Listesi 1</h3>
+                            <p>Kişisel çalma listesi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-card">
+                        <div class="card-image">
+                            <i class="fas fa-compact-disc"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Albüm 1</h3>
+                            <p>Favori sanatçı</p>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-card">
+                        <div class="card-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Sanatçı 1</h3>
+                            <p>Popüler sanatçı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağ Sidebar -->
+            <aside class="right-sidebar" id="rightSidebar">
+                <div class="sidebar-controls">
+                    <button class="minimize-btn" id="minimizeRight">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="now-playing">
+                    <div class="now-playing-header">
+                        <h3>Şu an çalıyor</h3>
+                    </div>
+                    <div class="current-track">
+                        <div class="track-artwork">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="track-info">
+                            <h4>Şarkı seçin</h4>
+                            <p>Sanatçı adı</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Bağlantılı Şarkılar</h3>
+                    <div class="related-songs">
+                        <div class="related-item">
+                            <div class="item-image">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Benzer Şarkı 1</span>
+                                <span class="item-artist">Sanatçı</span>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <div class="item-image">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Benzer Şarkı 2</span>
+                                <span class="item-artist">Sanatçı</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>İlgili müzik videoları</h3>
+                    <div class="video-list">
+                        <div class="video-item">
+                            <div class="video-thumbnail">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="video-info">
+                                <span class="video-title">Video Başlığı</span>
+                                <span class="video-channel">Kanal Adı</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Sanatçı hakkında</h3>
+                    <div class="artist-info">
+                        <div class="artist-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="artist-details">
+                            <h4>Sanatçı Adı</h4>
+                            <p>Aylık dinleyici sayısı</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-resizer sidebar-resizer-left" id="rightResizer"></div>
+            </aside>
+        </main>
+
+        <!-- Alt Player Bar -->
+        <footer class="bottom-player">
+            <div class="player-left">
+                <div class="current-song">
+                    <div class="song-artwork">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="song-info">
+                        <div class="song-title">Şarkı seçin</div>
+                        <div class="song-artist">Sanatçı 
+                            <button class="like-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-center">
+                <div class="player-controls">
+                    <button class="control-btn" id="shuffleBtn">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control-btn" id="repeatBtn">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                <div class="progress-bar">
+                    <span class="time current-time">0:00</span>
+                    <div class="progress-container">
+                        <div class="progress-track">
+                            <div class="progress-fill"></div>
+                            <div class="progress-handle"></div>
+                        </div>
+                    </div>
+                    <span class="time total-time">0:00</span>
+                </div>
+            </div>
+
+            <div class="player-right">
+                <div class="volume-control">
+                    <button class="control-btn" id="volumeBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="volume-slider">
+                        <input type="range" min="0" max="100" value="50" id="volumeSlider">
+                    </div>
+                </div>
+                <button class="control-btn" id="deviceBtn">
+                    <i class="fas fa-laptop"></i>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modern-modal-content">
+            <div class="modern-modal-header">
+                <div class="header-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h2>Hoş Geldin!</h2>
+                <p>Hesabına giriş yaparak müzik dünyasına katıl</p>
+                <button class="modern-close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modern-form" id="loginForm">
+                <div class="account-type-selector">
+                    <div class="selector-header">
+                        <span>Hesap Türü</span>
+                    </div>
+                    <div class="account-type-options">
+                        <label class="type-option">
+                            <input type="radio" name="accountType" value="user" checked>
+                            <div class="option-card">
+                                <i class="fas fa-user"></i>
+                                <span>Kullanıcı</span>
+                            </div>
+                        </label>
+                        <label class="type-option">
+                            <input type="radio" name="accountType" value="artist">
+                            <div class="option-card">
+                                <i class="fas fa-microphone"></i>
+                                <span>Sanatçı</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="modern-input-group">
+                    <div class="input-container">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">E-posta Adresi</label>
+                    </div>
+                </div>
+                <div class="modern-input-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" required>
+                        <label for="password">Şifre</label>
+                    </div>
+                </div>
+                <button type="submit" class="modern-submit-btn primary" id="submitLogin">
+                    <span>Giriş Yap</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <div class="modern-footer">
+                <p>Henüz hesabınız yok mu? <a href="#" id="registerLink" class="register-link">Ücretsiz kayıt ol</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modern-modal-content register-modal">
+            <div class="modern-modal-header">
+                <div class="header-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>Aramıza Katıl!</h2>
+                <p>Ücretsiz hesap oluşturarak müzik yolculuğuna başla</p>
+                <button class="modern-close-btn" id="closeRegisterModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Account Type Selection -->
+            <div class="account-type-selection" id="accountTypeSelection">
+                <h3>Hesap Türünü Seçin</h3>
+                <div class="account-type-cards">
+                    <div class="account-type-card" id="userTypeCard">
+                        <div class="account-type-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Kullanıcı</h4>
+                        <p>Müzik dinlemek ve çalma listesi oluşturmak için kayıt olun</p>
+                        <button class="account-type-btn" data-type="user">Kullanıcı Olarak Kayıt Ol</button>
+                    </div>
+                    <div class="account-type-card" id="artistTypeCard">
+                        <div class="account-type-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h4>Sanatçı</h4>
+                        <p>Müziklerinizi paylaşmak ve hayranlarınızla buluşmak için başvurun</p>
+                        <button class="account-type-btn" data-type="artist">Sanatçı Olarak Başvur</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Registration Form -->
+            <form class="login-form" id="registerForm" style="display: none;">
+                <button class="back-btn" id="backToTypeSelection" type="button">
+                    <i class="fas fa-arrow-left"></i> Geri
+                </button>
+                <h3>Kullanıcı Kayıt</h3>
+                <div class="form-group">
+                    <label for="firstName">Ad</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Adınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Soyad</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Soyadınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">E-posta Adresi</label>
+                    <input type="email" id="registerEmail" name="registerEmail" placeholder="ornek@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Telefon Numarası</label>
+                    <input type="tel" id="registerPhone" name="registerPhone" placeholder="+90 5XX XXX XX XX" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Şifre</label>
+                    <input type="password" id="registerPassword" name="registerPassword" placeholder="En az 6 karakter" required minlength="6">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">
+                            <a href="#" class="terms-link">Kullanım Şartları</a> ve 
+                            <a href="#" class="terms-link">Gizlilik Politikası</a>'nı kabul ediyorum
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn" id="submitRegister">Kayıt Ol</button>
+            </form>
+
+            <!-- Artist Application Form -->
+            <form class="login-form" id="artistForm" style="display: none;">
+                <button class="back-btn" id="backToTypeSelectionArtist" type="button">
+                    <i class="fas fa-arrow-left"></i> Geri
+                </button>
+                <h3>Sanatçı Başvurusu</h3>
+                <div class="form-group">
+                    <label for="artistName">Sanatçı Adı</label>
+                    <input type="text" id="artistName" name="artistName" placeholder="Sahne adınız veya grup adınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="artistEmail">E-posta Adresi</label>
+                    <input type="email" id="artistEmail" name="artistEmail" placeholder="sanatci@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="artistBirthDate">Doğum Tarihi</label>
+                    <input type="date" id="artistBirthDate" name="artistBirthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="artistPhone">Telefon Numarası</label>
+                    <input type="tel" id="artistPhone" name="artistPhone" placeholder="+90 5XX XXX XX XX" required>
+                </div>
+                <div class="form-group">
+                    <label for="socialMediaLink">Sosyal Medya Hesabı</label>
+                    <input type="url" id="socialMediaLink" name="socialMediaLink" placeholder="Instagram, YouTube, Spotify profil linki" required>
+                </div>
+                <div class="form-group">
+                    <label for="artistBio">Kısa Biyografi (İsteğe Bağlı)</label>
+                    <textarea id="artistBio" name="artistBio" placeholder="Müzik tarzınız, deneyimleriniz ve hedefleriniz hakkında kısa bilgi..."></textarea>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="acceptArtistTerms" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">
+                            <a href="#" class="terms-link">Sanatçı Kullanım Şartları</a> ve 
+                            <a href="#" class="terms-link">Gizlilik Politikası</a>'nı kabul ediyorum
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn" id="submitApplication">Başvuru Gönder</button>
+            </form>
+
+            <div class="modal-footer">
+                <p>Zaten hesabın var mı? <a href="#" id="loginLink">Giriş yap</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div class="modal" id="verificationModal">
+        <div class="modern-modal-content verification-modal">
+            <div class="modern-modal-header">
+                <button class="modern-close-btn" id="closeVerificationModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="verification-container">
+                <div class="verification-header">
+                    <div class="verification-icon">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <h3>E-posta Doğrulama</h3>
+                    <p>E-posta adresinize gönderilen 5 haneli doğrulama kodunu girin</p>
+                    <p class="email-display" id="emailDisplay"></p>
+                </div>
+                <form id="verificationForm">
+                    <div class="code-input-container">
+                        <input type="text" class="code-input" id="code1" maxlength="1" pattern="[0-9]" required>
+                        <input type="text" class="code-input" id="code2" maxlength="1" pattern="[0-9]" required>
+                        <input type="text" class="code-input" id="code3" maxlength="1" pattern="[0-9]" required>
+                        <input type="text" class="code-input" id="code4" maxlength="1" pattern="[0-9]" required>
+                        <input type="text" class="code-input" id="code5" maxlength="1" pattern="[0-9]" required>
+                    </div>
+                    <button type="submit" class="modern-submit-btn" id="submitVerification">
+                        <span>Kodu Doğrula</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="resend-section">
+                    <p>Kod almadınız mı? <a href="#" id="resendCode" class="resend-link">Tekrar gönder</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Profil Bilgileri</h2>
+                <button class="close-modal" id="closeProfileModal">×</button>
+            </div>
+            <form class="login-form" id="profileForm">
+                <div class="form-group">
+                    <label for="profileImageUpload">Profil Fotoğrafı</label>
+                    <div class="profile-image-upload-container">
+                        <div class="profile-image-preview" id="profileImagePreview">
+                            <img src="assets/profile.png" alt="Profil Fotoğrafı" id="profilePreviewImage">
+                            <div class="image-upload-overlay">
+                                <i class="fas fa-camera"></i>
+                                <span>Fotoğraf Değiştir</span>
+                            </div>
+                        </div>
+                        <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+                        <button type="button" class="change-photo-btn" id="changePhotoBtn">Fotoğraf Seç</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profileFirstName">Ad</label>
+                    <input type="text" id="profileFirstName" name="profileFirstName" placeholder="Adınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileLastName">Soyad</label>
+                    <input type="text" id="profileLastName" name="profileLastName" placeholder="Soyadınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileEmail">E-posta Adresi</label>
+                    <input type="email" id="profileEmail" name="profileEmail" placeholder="ornek@email.com" readonly>
+                </div>
+                <button type="submit" class="submit-btn">Bilgileri Güncelle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal settings-modal" id="settingsModal">
+        <div class="modal-content settings-content">
+            <div class="modal-header">
+                <h2>Ayarlar</h2>
+                <button class="close-modal" id="closeSettingsModal">×</button>
+            </div>
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <div class="settings-nav-item active" data-section="security">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Güvenlik</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="support">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Destek</span>
+                    </div>
+                </div>
+                <div class="settings-content">
+                    <!-- Security Section -->
+                    <div class="settings-section active" id="securitySection">
+                        <h3>Güvenlik Ayarları</h3>
+                        
+                        <div class="settings-group">
+                            <h4>Şifre Değiştir</h4>
+                            <p>Hesabınızın güvenliği için düzenli olarak şifrenizi değiştirin.</p>
+                            <button class="settings-btn" id="changePasswordBtn">Şifre Değiştir</button>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4>İki Aşamalı Doğrulama</h4>
+                            <p>Hesabınıza ek güvenlik katmanı ekleyin.</p>
+                            <div class="setting-toggle">
+                                <span id="twoFactorStatus">Kapalı</span>
+                                <button class="settings-btn" id="toggleTwoFactorBtn">Etkinleştir</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Support Section -->
+                    <div class="settings-section" id="supportSection">
+                        <h3>Destek</h3>
+                        
+                        <div class="settings-group">
+                            <h4>Yardım Merkezi</h4>
+                            <p>Sorularınız için kapsamlı yardım dokümantasyonu.</p>
+                            <button class="settings-btn">Yardım Merkezini Aç</button>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4>İletişim</h4>
+                            <p>Destek ekibimizle iletişime geçin.</p>
+                            <button class="settings-btn">Destek Talebi Oluştur</button>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4>Uygulama Bilgileri</h4>
+                            <p>Sonata v1.0.0</p>
+                            <p>© 2024 Sonata Music. Tüm hakları saklıdır.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Şifre Değiştir</h2>
+                <button class="close-modal" id="closeChangePasswordModal">×</button>
+            </div>
+            <form class="login-form" id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Mevcut Şifre</label>
+                    <input type="password" id="currentPassword" name="currentPassword" placeholder="Mevcut şifrenizi girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Yeni Şifre</label>
+                    <input type="password" id="newPassword" name="newPassword" placeholder="En az 6 karakter" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Yeni Şifre (Tekrar)</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Yeni şifreyi tekrar girin" required minlength="6">
+                </div>
+                <button type="submit" class="submit-btn">Şifre Değiştir</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Two Factor Setup Modal -->
+    <div class="modal" id="twoFactorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>İki Aşamalı Doğrulama</h2>
+                <button class="close-modal" id="closeTwoFactorModal">×</button>
+            </div>
+            <div class="login-form">
+                <div class="verification-info">
+                    <p>İki aşamalı doğrulamayı etkinleştirmek için e-posta adresinize gönderilen 6 haneli kodu girin:</p>
+                </div>
+                <form id="twoFactorForm">
+                    <div class="form-group">
+                        <label for="twoFactorCode">Doğrulama Kodu</label>
+                        <input type="text" id="twoFactorCode" name="twoFactorCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required>
+                    </div>
+                    <button type="submit" class="submit-btn">İki Aşamalı Doğrulamayı Etkinleştir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2FA Login Modal -->
+    <div class="modal" id="twoFactorLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>İki Aşamalı Doğrulama</h2>
+                <button class="close-modal" id="closeTwoFactorLoginModal">×</button>
+            </div>
+            <div class="login-form">
+                <div class="verification-info">
+                    <p>E-posta adresinize gönderilen 6 haneli doğrulama kodunu girin:</p>
+                </div>
+                <form id="twoFactorLoginForm">
+                    <div class="form-group">
+                        <label for="twoFactorLoginCode">Doğrulama Kodu</label>
+                        <input type="text" id="twoFactorLoginCode" name="twoFactorLoginCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Doğrula ve Giriş Yap</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Playlist Modal -->
+    <div class="modal" id="createPlaylistModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Çalma Listesi Oluştur</h2>
+                <button class="close-modal" id="closeCreatePlaylistModal">×</button>
+            </div>
+            <form class="login-form" id="createPlaylistForm">
+                <div class="playlist-image-section">
+                    <div class="playlist-image-preview" id="playlistImagePreview">
+                        <i class="fas fa-music"></i>
+                        <span>Resim Seçin</span>
+                    </div>
+                    <input type="file" id="playlistImageInput" accept="image/*" style="display: none;">
+                    <button type="button" class="image-select-btn" id="selectImageBtn">Resim Seç</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playlistName">Çalma Listesi Adı</label>
+                    <input type="text" id="playlistName" name="playlistName" placeholder="Çalma listesi adı" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playlistDescription">Açıklama (İsteğe bağlı)</label>
+                    <textarea id="playlistDescription" name="playlistDescription" placeholder="Çalma listesi açıklaması"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Oluştur</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Song Modal -->
+    <div class="modal" id="uploadSongModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Şarkı Yükle</h2>
+                <button class="close-modal" id="closeUploadSongModal">×</button>
+            </div>
+            <form class="login-form" id="uploadSongForm">
+                <!-- Song File Upload -->
+                <div class="form-group">
+                    <label for="songFile">Şarkı Dosyası (MP3/WAV)</label>
+                    <input type="file" id="songFile" name="songFile" accept=".mp3,.wav" required>
+                </div>
+                
+                <!-- Song Cover Upload -->
+                <div class="form-group">
+                    <label for="songCover">Şarkı Kapak Fotoğrafı (1:1 Oranında)</label>
+                    <div class="song-cover-section">
+                        <div class="song-cover-preview" id="songCoverPreview">
+                            <i class="fas fa-image"></i>
+                            <span>Kapak Resmi Seçin</span>
+                        </div>
+                        <input type="file" id="songCoverInput" accept="image/*" style="display: none;">
+                        <button type="button" class="image-select-btn" id="selectCoverBtn">Kapak Resmi Seç</button>
+                    </div>
+                </div>
+                
+                <!-- Song Title -->
+                <div class="form-group">
+                    <label for="songTitle">Şarkı Adı</label>
+                    <input type="text" id="songTitle" name="songTitle" placeholder="Şarkı adını girin" required>
+                </div>
+                
+                <!-- Artist Name -->
+                <div class="form-group">
+                    <label for="songArtist">Sanatçı Adı</label>
+                    <input type="text" id="songArtist" name="songArtist" placeholder="Sanatçı adını girin" required>
+                </div>
+                
+                <!-- Contributors -->
+                <div class="form-group">
+                    <label for="songProducer">Prodüktör (İsteğe bağlı)</label>
+                    <input type="text" id="songProducer" name="songProducer" placeholder="Prodüktör adını girin">
+                </div>
+                
+                <div class="form-group">
+                    <label for="songWriter">Söz Yazarı (İsteğe bağlı)</label>
+                    <input type="text" id="songWriter" name="songWriter" placeholder="Söz yazarı adını girin">
+                </div>
+                
+                <div class="form-group">
+                    <label for="songComposer">Besteci (İsteğe bağlı)</label>
+                    <input type="text" id="songComposer" name="songComposer" placeholder="Besteci adını girin">
+                </div>
+                
+                <div class="form-group">
+                    <label for="songGenre">Tür (İsteğe bağlı)</label>
+                    <input type="text" id="songGenre" name="songGenre" placeholder="Müzik türünü girin">
+                </div>
+                
+                <button type="submit" class="submit-btn">Yayınla</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html> 
